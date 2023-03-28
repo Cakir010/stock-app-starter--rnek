@@ -1,12 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchFail, fetchStart, loginSuccess, registerSuccess } from "../features/authSlice";
 
 const useAuthCall = () => {
 
     const dispatch = useDispatch()
-//   const navigate = useNavigate()
+  const navigate = useNavigate()
 
 
 
@@ -18,7 +19,7 @@ const useAuthCall = () => {
       const { data } = await axios.post(`${BASE_URL}account/auth/login`);
       dispatch(loginSuccess(data));
     //   toastSuccessNotify("Login performed");
-        // navigate("/stock")
+        navigate("/stock")
       console.log(data);
     } catch (error) {
       dispatch(fetchFail());
@@ -34,7 +35,7 @@ const useAuthCall = () => {
       )
       dispatch(registerSuccess(data))
     //   toastSuccessNotify("Register performed")
-    //   navigate("/stock")
+      navigate("/register")
     } catch (err) {
       dispatch(fetchFail())
     //   toastErrorNotify("Register can not be performed")
