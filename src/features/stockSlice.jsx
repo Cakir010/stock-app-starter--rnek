@@ -1,11 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
- name: 'stock',
-}
 
 const stockSlice = createSlice({
- 
+ name: 'stock',
   initialState:{
     purchases: null,
     sales: null,
@@ -32,6 +29,6 @@ const stockSlice = createSlice({
     }
 });
 
-export const {} = stockSlice.actions
+export const {getSuccess , fetchFail , fetchStart} = stockSlice.actions
 
 export default stockSlice.reducer
