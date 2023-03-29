@@ -1,10 +1,13 @@
-import { LoadingButton } from "@mui/lab";
-import { Box, TextField } from "@mui/material";
-import { Form } from "formik";
-import { object , string} from "yup";
+import Box from "@mui/material/Box"
+import TextField from "@mui/material/TextField"
+import LoadingButton from "@mui/lab/LoadingButton"
 
-export const loginScheme = object ({
-    email: string()
+import { Form } from "formik"
+import { useSelector } from "react-redux"
+import { object, string } from "yup"
+
+export const loginScheme = object({
+  email: string()
     .email("Lutfen valid bir email giriniz")
     .required("Email zorunludur"),
   password: string()
@@ -17,7 +20,8 @@ export const loginScheme = object ({
     .matches(/[!,?{}><%&$#£+-.]+/, "Password bir özel karakter içermelidir"),
 })
 
-const LoginForm = ({values , handleChange ,handleBlur,touched, errors }) => {
+const LoginForm = ({ values, handleChange, errors, touched, handleBlur }) => {
+  const { loading } = useSelector((state) => state.auth)
   return (
     <Form>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -30,22 +34,23 @@ const LoginForm = ({values , handleChange ,handleBlur,touched, errors }) => {
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
-          helperTet={touched.email && errors.email}
+          helperText={touched.email && errors.email}
           error={touched.email && Boolean(errors.email)}
         />
         <TextField
           label="password"
           name="password"
           id="password"
-          type="email"
+          type="password"
           variant="outlined"
           value={values.password}
           onChange={handleChange}
           onBlur={handleBlur}
-          helperTet={touched.email && errors.password}
+          helperText={touched.password && errors.password}
           error={touched.password && Boolean(errors.password)}
         />
         <LoadingButton
+          loading={loading}
           loadingPosition="center"
           variant="contained"
           type="submit"
@@ -54,7 +59,8 @@ const LoginForm = ({values , handleChange ,handleBlur,touched, errors }) => {
         </LoadingButton>
       </Box>
     </Form>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm
+ 
