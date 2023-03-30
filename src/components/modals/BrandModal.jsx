@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import useStockCall from "../../hooks/useStockCall";
+import { flexColumn, modalStyle } from "../../styles/globalStyles";
 
 const style = {
   position: "absolute",
@@ -47,29 +48,33 @@ const BrandModal = ({ open, handleClose, info, setInfo }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box onSubmit={handleSubmit} sx={style} component="form">
+        <Box sx={modalStyle}>
+            <Box sx={flexColumn} onSubmit={handleSubmit}  component="form">
           <TextField
-            variant="outlined"
             label="Brand Name"
             name="name"
             id="name"
             type="text"
+            variant="outlined"
             value={info?.name || ""}
             onChange={handleChange}
           />
           <TextField
-            variant="outlined"
             label="ımage Url"
             name="image"
             id="image"
             type="url"
+            variant="outlined"
             value={info?.image || ""}
             onChange={handleChange}
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" size='large'>
             Save Brand
           </Button>
         </Box>
+        </Box>
+        
+
       </Modal>
     </div>
   );
