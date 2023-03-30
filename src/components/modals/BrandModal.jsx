@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { TextField } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -16,8 +17,19 @@ const style = {
   p: 4,
 };
 
-const BrandModal =()=> {
+const BrandModal =({open , handleClose , info , setInfo})=> {
  
+const handleChange= (e) => {
+    const { name , value} = e.target
+setInfo({...info , [name] : value})
+}
+
+const handleSubmit = (e) =>{
+    e.preventDefault()
+    
+
+}
+
 
   return (
     <div>
@@ -28,13 +40,15 @@ const BrandModal =()=> {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} component='form'>
         <TextField
         variant='outlined'
         label='Brand Name'
         name='name'
         id='name'
         type='text'
+        value={info?.name || ''}
+        onChange={handleChange}
         />
         <TextField
         variant='outlined'
@@ -42,6 +56,8 @@ const BrandModal =()=> {
         name='image'
         id='image'
         type='url'
+        value={info?.image || ''}
+        onChange={handleChange}
         />
         <Button type='submit' variant='contained' color='primary'>Save Brand</Button>
         </Box>
