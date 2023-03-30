@@ -50,7 +50,7 @@ const LoginForm = ({ values, handleChange, errors, touched, handleBlur }) => {
           error={touched.password && Boolean(errors.password)}
         />
         <LoadingButton
-          loading={loading}
+          // loading={loading}
           loadingPosition="center"
           variant="contained"
           type="submit"

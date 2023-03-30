@@ -24,7 +24,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setInfo({...info, [id]: value });
+    setInfo({ ...info, [id]: value });
   };
 
   const handleSubmit = (e) => {
@@ -34,14 +34,17 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
     } else {
       postStockData("firms", info);
     }
-
+    setInfo({});
     handleClose();
   };
   return (
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => {
+          handleClose();
+          setInfo({});
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -58,6 +61,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="text"
               variant="outlined"
               onChange={handleChange}
+              value={info?.name || ""}
             />
             <TextField
               label="Firm Phone"
@@ -66,6 +70,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="tel"
               variant="outlined"
               onChange={handleChange}
+              value={info?.phone || ""}
             />
             <TextField
               label="Firm Address"
@@ -74,6 +79,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="text"
               variant="outlined"
               onChange={handleChange}
+              value={info?.address || ""}
             />
             <TextField
               label="Image"
@@ -82,6 +88,7 @@ export default function FirmModal({ open, info, setInfo, handleClose }) {
               type="url"
               variant="outlined"
               onChange={handleChange}
+              value={info?.image || ""}
             />
             <Button type="submit" variant="contained">
               Submit Firm

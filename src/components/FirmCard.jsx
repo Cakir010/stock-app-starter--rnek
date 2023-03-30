@@ -9,8 +9,15 @@ import Firms from '../pages/Firms';
 import { btnStyle, flex } from '../styles/globalStyles';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
+import useStockCall from '../hooks/useStockCall';
 
- function FirmCard({firm}) {
+ function FirmCard({firm  , handleOpen , setOpen , setInfo}) {
+
+const{deleteStockData} = useStockCall()
+const handleEdit = () => {
+handleOpen() 
+ setInfo(firm)
+}
 
   return (
     <Card
@@ -43,12 +50,15 @@ import EditIcon from "@mui/icons-material/Edit"
       </CardContent>
       <CardActions sx={flex}>
       <EditIcon
+          onClick={()=>{
+            setInfo(firm) 
+            handleOpen()
+          }}
           sx={btnStyle}
-          
         />
         <DeleteOutlineIcon
+          onClick={()=> deleteStockData('firms', firm.id)}
           sx={btnStyle}
-          
         />
       </CardActions>
     </Card>

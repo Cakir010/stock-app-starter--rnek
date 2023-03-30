@@ -9,7 +9,6 @@ import { flex } from "../styles/globalStyles";
 
 const Firms = () => {
   const [open, setOpen] = useState(false);
-
   const [info, setInfo] = useState({
     name: "",
     phone: "",
@@ -37,12 +36,17 @@ const Firms = () => {
         New Firm
       </Button>
 
-      <FirmModal info={info} setInfo={setInfo} open={open} handleClose={handleClose} />
+      <FirmModal
+        setInfo={setInfo}
+        info={info}
+        open={open}
+        handleClose={handleClose}
+      />
 
       <Grid container sx={flex}>
         {firms?.map((firm) => (
           <Grid item key={firm.id}>
-            <FirmCard firm={firm} />
+            <FirmCard setInfo={setInfo} handleOpen={handleOpen} firm={firm} />
           </Grid>
         ))}
       </Grid>
